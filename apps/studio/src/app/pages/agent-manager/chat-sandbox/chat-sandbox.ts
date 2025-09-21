@@ -41,7 +41,7 @@ export class ChatSandbox implements AfterViewInit {
   }
 
   private extractMessageFromXML(xmlResponse: string): string {
-    const regex = /<Message>(.*?)<\/Message>/;
+    const regex = /<Message>(.*?)<\/Message>/s;
     const match = xmlResponse.match(regex);
     return match ? match[1] : xmlResponse; // Return original if no match
   }
