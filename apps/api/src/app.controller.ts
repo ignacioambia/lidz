@@ -1,9 +1,25 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
+import { ChatsService } from './chats/chats.service';
+
+export interface TwilioWebhookBody {
+  MessageSid: string;
+  AccountSid: string;
+  From: string;
+  To: string;
+  Body: string;
+  NumMedia: string;
+  ProfileName?: string;
+  WaId: string;
+  // ... other fields
+}
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly chatsService: ChatsService,
+  ) {}
 
   @Get()
   getHello(): string {
@@ -11,9 +27,12 @@ export class AppController {
   }
 
   @Post('wa-message')
-  processWhatsAppMessage(@Body() messageDto: any): any {
-    console.log('WhatsApp message endpoint hit', messageDto);
-    return `<Response><Message>Message received: ${messageDto['Body']}</Message></Response>`;
+  async processWhatsAppMessage(
+    @Body() messageDto: TwilioWebhookBody,
+  ): Promise<any> {
+    console.log('Received WhatsApp message:', messageDto);
+    const response = await this.chatsService.processMessage(messageDto);
+    return `<Response><Message>${response}</Message></Response>`;
   }
 
   @Get('wa-message-status')
