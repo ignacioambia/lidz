@@ -1,0 +1,17 @@
+<div class="chat-sandbox">
+    <div class="header">
+        nombre de chat
+    </div>
+    <div class="conversation" #conversationContainer>
+        @if(!messageHistory().length) {
+        <div class="no-messages">
+            <p>Escribe para empezar una conversación...</p>
+        </div>
+        } @else {
+        @for ( message of messageHistory(); track $index) {
+        <div class="message" [class]="message.sender"> {{message.content}}</div>
+        }
+        }
+    </div>
+    <chat-input (messageSubmitted)="onMessageSubmitted($event)" />
+</div>
