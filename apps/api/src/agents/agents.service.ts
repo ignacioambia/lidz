@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAgentDto } from './dto/create-agent.dto';
-import { UpdateAgentDto } from './dto/update-agent.dto';
+import { UpdateAgentInstructionsDto } from './dto/update-agent-instructions.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Agent, AgentDocument } from '../schemas/agent.schema';
 import { Model, Types } from 'mongoose';
@@ -32,8 +32,28 @@ export class AgentsService {
     return `This action returns a #${id} agent`;
   }
 
-  update(id: number, updateAgentDto: UpdateAgentDto) {
-    return `This action updates a #${id} agent`;
+  async updateInstructions(
+    agentId: string,
+    { instructions }: UpdateAgentInstructionsDto,
+  ): Promise<AgentsAPI.PatchInstructions.Response> {
+    const agent = await this.agentModel
+      .findOneAndUpdate(
+        { agentId },
+        { instructions },
+        {
+          new: true,
+        },
+      )
+      .exec();
+
+    if (!agent) {
+      throw new NotFoundException('Agent not found');
+    }
+
+    return {
+      agentId: agent.agentId,
+      message: 'Instrucciones actualizadas con éxito',
+    };
   }
 
   remove(id: number) {

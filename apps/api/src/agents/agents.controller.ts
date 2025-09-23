@@ -10,7 +10,7 @@ import {
 import { AgentsAPI } from '@lidz/shared';
 import { AgentsService } from './agents.service';
 import { CreateAgentDto } from './dto/create-agent.dto';
-import { UpdateAgentDto } from './dto/update-agent.dto';
+import { UpdateAgentInstructionsDto } from './dto/update-agent-instructions.dto';
 import { Types } from 'mongoose';
 
 @Controller('agents')
@@ -36,9 +36,12 @@ export class AgentsController {
     return this.agentsService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAgentDto: UpdateAgentDto) {
-    return this.agentsService.update(+id, updateAgentDto);
+  @Patch(':agentId/instructions')
+  updateInstructions(
+    @Param('agentId') agentId: string,
+    @Body() updateAgentDto: UpdateAgentInstructionsDto,
+  ): Promise<AgentsAPI.PatchInstructions.Response> {
+    return this.agentsService.updateInstructions(agentId, updateAgentDto);
   }
 
   @Delete(':id')
