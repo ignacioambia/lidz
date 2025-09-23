@@ -8,6 +8,7 @@ import {
   Conversation,
   ConversationSchema,
 } from './schemas/conversation.schema';
+import { AgentsModule } from './agents/agents.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import {
     MongooseModule.forFeature([
       { name: Conversation.name, schema: ConversationSchema },
     ]),
+    AgentsModule,
   ],
   controllers: [AppController],
   providers: [AppService, ChatsService],
