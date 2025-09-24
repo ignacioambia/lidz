@@ -49,7 +49,7 @@ export class ChatSandbox implements AfterViewInit {
   onMessageSubmitted(message: string): void {
     console.log('Message submitted:', message);
     this.messageHistory.update(history => [...history, { content: message, sender: 'user' }]);
-    this.http.post('http://localhost:3000/wa-message', { Body: message, From: 'mock-1', To: 'assistant-1' }, { responseType: 'text' }).subscribe((response: any) => {
+    this.http.post('/wa-message', { Body: message, From: 'mock-1', To: 'assistant-1' }, { responseType: 'text' }).subscribe((response: any) => {
       console.log('Response from /wa-message:', response);
       const extractedMessage = this.extractMessageFromXML(response);
       this.messageHistory.update(history => [...history, { content: extractedMessage, sender: 'bot' }]);
