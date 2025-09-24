@@ -1,4 +1,10 @@
 <div class="wrapper">
-    <div class="bot-specification">Another thing</div>
+    <div class="bot-specification">
+        <h3>Instrucciones</h3>
+        <textarea 
+            (blur)="manageInstructions()" 
+            [(ngModel)]="instructions"
+            placeholder="Ingresa instrucciones sobre cómo quieres que se comporte tu asistente de whatsapp"></textarea>
+    </div>
     <chat-sandbox />
 </div>

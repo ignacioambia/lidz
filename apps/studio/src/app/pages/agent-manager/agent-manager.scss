@@ -7,6 +7,17 @@
     // box-sizing: border-box;
     // gap: 1rem;
 
+    .bot-specification {
+        border-right: 1px solid #777777;
+        padding: 2rem;
+        box-sizing: border-box;
+
+        textarea {
+            width: 100%;
+            min-height: 40vh;
+        }
+    }
+
     >* {
 
         &:first-child {

@@ -10,4 +10,8 @@ export const routes: Routes = [
         path: 'agentes/nuevo',
         loadComponent: () => import('./pages/agent-manager/agent-manager').then(m => m.AgentManager),
     },
+    {
+        path: 'agentes/:agentId',
+        loadComponent: () => import('./pages/agent-manager/agent-manager').then(m => m.AgentManager),
+    },
 ];
