@@ -29,5 +29,6 @@ import { AgentsModule } from './agents/agents.module';
   ],
   controllers: [AppController],
   providers: [AppService, ChatsService],
+  exports: [ChatsService],
 })
 export class AppModule {}

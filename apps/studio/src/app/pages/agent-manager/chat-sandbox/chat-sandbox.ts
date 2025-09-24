@@ -1,4 +1,13 @@
-import { Component, effect, inject, signal, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  effect,
+  inject,
+  signal,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  input,
+} from '@angular/core';
 import { ChatInput } from '../chat-input/chat-input';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,14 +20,17 @@ interface Message {
   selector: 'chat-sandbox',
   imports: [ChatInput],
   templateUrl: './chat-sandbox.html',
-  styleUrl: './chat-sandbox.scss'
+  styleUrl: './chat-sandbox.scss',
 })
 export class ChatSandbox implements AfterViewInit {
-
   @ViewChild('conversationContainer') conversationContainer!: ElementRef;
 
-  public messageHistory =  signal<Message[]>([]);
+  public messageHistory = signal<Message[]>([]);
   public http = inject(HttpClient);
+
+  public agentId = input<string>('');
+  //TODO: This is just to mock a sender ID, replace with real user ID when auth is implemented
+  private senderId = signal<string>(new Date().getTime().toString()); // Mock sender ID
 
   ngAfterViewInit() {
     this.scrollToBottom();
@@ -35,7 +47,7 @@ export class ChatSandbox implements AfterViewInit {
       const container = this.conversationContainer.nativeElement;
       container.scrollTo({
         top: container.scrollHeight,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   }
@@ -48,11 +60,22 @@ export class ChatSandbox implements AfterViewInit {
 
   onMessageSubmitted(message: string): void {
     console.log('Message submitted:', message);
-    this.messageHistory.update(history => [...history, { content: message, sender: 'user' }]);
-    this.http.post('/wa-message', { Body: message, From: 'mock-1', To: 'assistant-1' }, { responseType: 'text' }).subscribe((response: any) => {
-      console.log('Response from /wa-message:', response);
-      const extractedMessage = this.extractMessageFromXML(response);
-      this.messageHistory.update(history => [...history, { content: extractedMessage, sender: 'bot' }]);
-    });
+    this.messageHistory.update((history) => [
+      ...history,
+      { content: message, sender: 'user' },
+    ]);
+    this.http
+      .post(
+        '/wa-message',
+        { Body: message, From: this.senderId(), To: this.agentId() },
+        { responseType: 'text' }
+      )
+      .subscribe((response: any) => {
+        const extractedMessage = this.extractMessageFromXML(response);
+        this.messageHistory.update((history) => [
+          ...history,
+          { content: extractedMessage, sender: 'bot' },
+        ]);
+      });
   }
 }

@@ -6,5 +6,5 @@
             [(ngModel)]="instructions"
             placeholder="Ingresa instrucciones sobre cómo quieres que se comporte tu asistente de whatsapp"></textarea>
     </div>
-    <chat-sandbox />
+    <chat-sandbox [agentId]="agentId()" />
 </div>

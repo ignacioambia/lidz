@@ -16,13 +16,11 @@ import { retry } from 'rxjs';
 })
 export class AgentManager {
   public instructions = signal<string>('');
-  private http = inject(HttpClient);
   private location = inject(Location);
-  private router = inject(Router);
   private agentsService = inject(AgentsService);
   private route = inject(ActivatedRoute);
 
-  private agentId = signal<string>('');
+  public agentId = signal<string>('');
 
   private agentIdEffect = effect(() => {
     const agentId = this.agentId();
