@@ -19,14 +19,15 @@ export class Agent {
   @Prop({ required: true })
   instructions: string;
 
-  @Prop({ default: Date.now })
-  createdAt: Date;
-
   @Prop({ default: () => nanoid(), index: true, unique: true })
   agentId: string;
 
   @Prop({ default: true })
   isActive: boolean;
+
+  createdAt: Date;
+
+  updatedAt: Date;
 }
 
 export const AgentSchema = SchemaFactory.createForClass(Agent);

@@ -31,9 +31,9 @@ export class AgentsController {
     return this.agentsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.agentsService.findOne(+id);
+  @Get(':agentId')
+  findOne(@Param('agentId') agentId: string) {
+    return this.agentsService.findOne(agentId);
   }
 
   @Patch(':agentId/instructions')

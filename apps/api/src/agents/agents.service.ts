@@ -28,8 +28,16 @@ export class AgentsService {
     return `This action returns all agents`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} agent`;
+  async findOne(agentId: string): Promise<AgentsAPI.GetById.Response> {
+    const agent = await this.agentModel.findOne({ agentId }).exec();
+    if (!agent) {
+      throw new NotFoundException('Agent not found');
+    }
+    return {
+      instructions: agent.instructions,
+      createdAt: agent.createdAt.toISOString(),
+      updatedAt: agent.updatedAt.toISOString(),
+    };
   }
 
   async updateInstructions(
