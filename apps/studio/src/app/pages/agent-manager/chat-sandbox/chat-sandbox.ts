@@ -37,7 +37,7 @@ export class ChatSandbox implements AfterViewInit {
   }
 
   // Watch for changes in messageHistory and scroll to bottom
-  messageEffect = effect(() => {
+  private messageEffect = effect(() => {
     this.messageHistory(); // Subscribe to signal
     setTimeout(() => this.scrollToBottom(), 0); // Use setTimeout to ensure DOM is updated
   });
@@ -53,9 +53,18 @@ export class ChatSandbox implements AfterViewInit {
   }
 
   private extractMessageFromXML(xmlResponse: string): string {
-    const regex = /<Message>(.*?)<\/Message>/s;
-    const match = xmlResponse.match(regex);
-    return match ? match[1] : xmlResponse; // Return original if no match
+  const regex = /<Message>(.*?)<\/Message>/s;
+  const match = xmlResponse.match(regex);
+  const message = match ? match[1] : xmlResponse; // Return original if no match
+
+  // WhatsApp-style formatting to HTML
+  return message
+    .replace(/```(.*?)```/gs, '<code>$1</code>') // triple backtick code
+    .replace(/`([^`]+)`/g, '<code>$1</code>') // inline code
+    .replace(/\*(.*?)\*/g, '<b>$1</b>') // bold
+    .replace(/_(.*?)_/g, '<i>$1</i>') // italic
+    .replace(/~(.*?)~/g, '<s>$1</s>') // strikethrough
+    .replace(/\n/g, '<br>'); // line breaks
   }
 
   onMessageSubmitted(message: string): void {

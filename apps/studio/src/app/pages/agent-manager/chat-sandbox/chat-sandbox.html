@@ -9,7 +9,7 @@
         </div>
         } @else {
         @for ( message of messageHistory(); track $index) {
-        <div class="message" [class]="message.sender"> {{message.content}}</div>
+        <div class="message" [class]="message.sender" [innerHTML]="message.content"></div>
         }
         }
     </div>
