@@ -47,7 +47,7 @@ export class AgentManager {
     });
   }
 
-  public manageInstructions(): void {
+  public saveInstructions(): void {
     const agentExists = !!this.agentId();
     if (!agentExists) {
       this.agentsService.createAgent(this.instructions()).subscribe({
