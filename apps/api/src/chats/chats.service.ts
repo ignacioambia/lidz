@@ -8,9 +8,16 @@ import {
   ConversationDocument,
 } from '../schemas/conversation.schema';
 import { AgentsService } from 'src/agents/agents.service';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 @Injectable()
 export class ChatsService {
+  private formattingInstructions = readFileSync(
+    join(__dirname, '/formatting-instructions.md'),
+    'utf-8',
+  );
+
   constructor(
     @InjectModel(Conversation.name)
     private conversationModel: Model<ConversationDocument>,
@@ -29,7 +36,7 @@ export class ChatsService {
     const agent = new Agent({
       //TODO: Replace with dynamic name, Name functionality to be added in the future
       name: 'WhatsApp Assistant',
-      instructions: agentData.instructions, // Example instruction
+      instructions: `${agentData.instructions}\n\n${this.formattingInstructions}`,
     });
 
     // Get conversation history from database
