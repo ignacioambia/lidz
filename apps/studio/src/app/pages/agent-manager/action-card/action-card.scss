@@ -1,0 +1,73 @@
+.action-card {
+  border: 1px solid #27272a19;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  background: white;
+  // min-height: 100%;
+  // margin: 8px 0;
+  // background-color: #f9f9f9;
+  font-size: 1rem;
+
+  hr {
+    border: none;
+    border-top: 1px solid #27272a19;
+  }
+
+  .title {
+    font-weight: 600;
+    margin: 0.5rem 0;
+  }
+
+  &.pending {
+    border-style: dashed;
+    border-color: #facc15;
+  }
+  &.rejected {
+    border-style: dashed;
+    border-color: #f87171;
+  }
+
+  .description {
+    color: #595959;
+  }
+
+  .property {
+    border-left: 3px solid #14b8a6;
+    // border-radius: 0.5rem;
+    background-color: oklch(95.3% 0.051 180.801);
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    color: oklch(38.6% 0.063 188.416);
+    font-size: 0.875rem;
+
+    .name {
+      font-weight: 600;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
+}
+
+.alert-banner {
+  background-color: #fffbe6; // soft yellow
+  color: #b45309; // dark amber
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  //   font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &.rejected {
+    background-color: #fef2f2; // soft red
+    color: #b91c1c; // dark red
+  }
+
+
+}

@@ -1,0 +1,32 @@
+<div class="action-card" [class]="action().status">
+    @if (action().status === 'pending') {
+    <div class="alert-banner">
+        ⚠️ Requiere aceptación.
+    </div>
+    }
+    @if (action().status === 'rejected') {
+    <div class="alert-banner rejected">
+        ❌ Acción rechazada.
+    </div>
+    }
+
+    <p class="title">{{ title() }}</p>
+    <hr />
+    <p class="description">{{ action().tool.description }}</p>
+    <hr />
+
+    <i>Propiedades:</i>
+    @for (property of properties(); track $index) {
+    <div class="property">
+        <div class="name">{{ property.name }}</div>
+        <div>{{ property.description }}</div>
+    </div>
+    }
+    @if (action().status === 'pending') {
+    <div class="buttons">
+        <button lidz-button variant="outline" type="cancel">Rechazar</button>
+        <button lidz-button variant="outline">Aceptar</button>
+    </div>
+    }
+
+</div>
