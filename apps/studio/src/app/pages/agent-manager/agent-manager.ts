@@ -2,26 +2,23 @@ import { Component, computed, effect, inject, signal } from '@angular/core';
 import { Location } from '@angular/common';
 import { ChatSandbox } from './chat-sandbox/chat-sandbox';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { AgentAction, AgentsAPI } from '@lidz/shared';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AgentAction } from '@lidz/shared';
+import { ActivatedRoute } from '@angular/router';
 import { AgentsService } from '../../services/agents-service';
 import { ActionCard } from './action-card/action-card';
 import { Button } from '../../button/button';
-import { LucideAngularModule, ZapOffIcon } from 'lucide-angular';
 
 @Component({
   selector: 'app-agent-manager',
-  imports: [ChatSandbox, FormsModule, ActionCard, Button, LucideAngularModule],
+  imports: [ChatSandbox, FormsModule, ActionCard, Button],
   templateUrl: './agent-manager.html',
   styleUrl: './agent-manager.scss',
 })
 export class AgentManager {
-  readonly ZapOffIcon = ZapOffIcon
   public instructions = signal<string>('');
   private actions = signal<AgentAction[]>([
     {
-      type: 'NOTIFICATION',
+      type: 'notification',
       status: 'rejected',
       tool: {
         name: 'notificar_seleccion_de_fruta',
@@ -35,28 +32,6 @@ export class AgentManager {
         },
       },
     },
-    // {
-    // type: "NOTIFICATION",
-    // status: "confirmed",
-    // tool: {
-    //   name: "notificar_seleccion_de_fruta",
-    //   description: "Notifica cuando el usuario haya seleccionado una fruta de la lista proporcionada.",
-    //   parameters: {
-    //       fruta_seleccionada: "Nombre de la fruta seleccionada por el usuario."
-    //     }
-    //   }
-    // },
-    // {
-    // type: "NOTIFICATION",
-    // status: "rejected",
-    // tool: {
-    //   name: "notificar_seleccion_de_fruta",
-    //   description: "Notifica cuando el usuario haya seleccionado una fruta de la lista proporcionada.",
-    //   parameters: {
-    //       fruta_seleccionada: "Nombre de la fruta seleccionada por el usuario."
-    //     }
-    //   }
-    // }
   ]);
 
   public displayedActions = computed(() =>

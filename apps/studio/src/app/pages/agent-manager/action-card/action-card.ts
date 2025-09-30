@@ -10,7 +10,7 @@ import { Button } from '../../../button/button';
 })
 export class ActionCard {
   action = input<AgentAction>({
-    type: 'NOTIFICATION',
+    type: 'notification',
     status: 'pending',
     tool: { name: '', description: '', parameters: {} },
   });
