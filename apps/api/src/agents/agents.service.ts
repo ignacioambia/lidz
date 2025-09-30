@@ -4,7 +4,9 @@ import { UpdateAgentInstructionsDto } from './dto/update-agent-instructions.dto'
 import { InjectModel } from '@nestjs/mongoose';
 import { Agent, AgentDocument } from '../schemas/agent.schema';
 import { Model, Types } from 'mongoose';
+import { run } from '@openai/agents';
 import { AgentsAPI } from '@lidz/shared';
+import { agentManager } from './agent-manager.agent';
 
 @Injectable()
 export class AgentsService {
@@ -28,6 +30,15 @@ export class AgentsService {
     return `This action returns all agents`;
   }
 
+  async detectRequiredActions(instructions: string): Promise<string[]> {
+    const actionsFound = await run(
+      agentManager,
+      `¿Las siguientes instrucciones requieren de alguna acción?\n\n${instructions}`,
+    );
+
+    return (actionsFound.finalOutput as { actions: string[] }).actions;
+  }
+
   async findOne(agentId: string): Promise<AgentsAPI.GetById.Response> {
     const agent = await this.agentModel.findOne({ agentId }).exec();
     if (!agent) {
@@ -44,6 +55,8 @@ export class AgentsService {
     agentId: string,
     { instructions }: UpdateAgentInstructionsDto,
   ): Promise<AgentsAPI.PatchInstructions.Response> {
+    // const actionsFound = await this.detectRequiredActions(instructions);
+
     const agent = await this.agentModel
       .findOneAndUpdate(
         { agentId },
