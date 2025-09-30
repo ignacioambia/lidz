@@ -36,7 +36,24 @@ export const agentManager = new Agent({
                       properties: {
                         type: 'object',
                         properties: {},
-                        additionalProperties: { type: 'string' },
+                        additionalProperties: {
+                          type: 'object',
+                          properties: {
+                            type: {
+                              type: 'string',
+                              enum: ['string'],
+                              description:
+                                'The type of the argument (always string)',
+                            },
+                            description: {
+                              type: 'string',
+                              description:
+                                'A brief description of the argument',
+                            },
+                          },
+                          required: ['type', 'description'],
+                          additionalProperties: false, // <-- each property must be an object with a "type" of "string"
+                        },
                         description:
                           'The parameters of the function, written in JSON Schema format',
                       },
