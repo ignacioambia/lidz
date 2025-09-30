@@ -1,0 +1,14 @@
+.sidebar-wrapper {
+    border: 1px solid #27272a19;
+    width: 15rem;
+    height: 100vh;
+
+    .element {
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid #eee;
+
+        &:hover {
+            background: darken(#ddd, 5%);
+        }
+    }
+}
