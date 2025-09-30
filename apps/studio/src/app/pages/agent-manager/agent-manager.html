@@ -1,10 +1,36 @@
 <div class="wrapper">
-    <div class="bot-specification">
-        <h3>Instrucciones</h3>
-        <textarea [(ngModel)]="instructions"
-            placeholder="Ingresa instrucciones sobre cómo quieres que se comporte tu asistente de whatsapp">
-        </textarea>
-        <button (click)="saveInstructions()">Guardar</button>
+  <div class="bot-specification">
+    <div class="instructions">
+      <h3>Instrucciones</h3>
+      <textarea [(ngModel)]="instructions"
+        placeholder="Ingresa instrucciones sobre cómo quieres que se comporte tu asistente de whatsapp">
+      </textarea>
+      <button lidz-button (click)="saveInstructions()">Guardar</button>
     </div>
-    <chat-sandbox [agentId]="agentId()" />
+    <div class="actions">
+      <div class="actions-header">
+        <h3>Acciones</h3>
+        <div>
+          <input type="checkbox" [checked]="showRejected()" (change)="onShowRejectedChange($event)" id="showRejected" />
+          <p>Mostrar acciones rechazadas</p>
+        </div>
+
+      </div>
+      <div class="action-cards">
+        @for( action of displayedActions(); track $index) {
+        <action-card [action]="action" />
+        }
+      </div>
+
+      @if(!displayedActions().length) {
+      <div class="no-actions">
+        <h3>Sin acciones por el momento</h3>
+        <p>No hay acciones detectadas por el momento desde las instrucciones.</p>
+      </div>
+      }
+
+
+    </div>
+  </div>
+  <chat-sandbox [agentId]="agentId()" />
 </div>
