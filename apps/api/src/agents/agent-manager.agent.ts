@@ -15,13 +15,14 @@ export const agentManager = new Agent({
           items: {
             type: 'object',
             properties: {
-              type: { type: 'string', enum: ['NOTIFICATION'] },
+              type: { type: 'string', enum: ['notification'] },
               tool: {
                 type: 'object',
                 properties: {
                   name: {
                     type: 'string',
-                    description: 'The name of the function written in spanish',
+                    description:
+                      'The name of the function written in spanish and snake_case',
                   },
                   description: {
                     type: 'string',
@@ -36,6 +37,8 @@ export const agentManager = new Agent({
                       properties: {
                         type: 'object',
                         properties: {},
+                        description:
+                          'Each property must be an argument in snake_case. All keys must be in snake_case.',
                         additionalProperties: {
                           type: 'object',
                           properties: {
@@ -54,8 +57,6 @@ export const agentManager = new Agent({
                           required: ['type', 'description'],
                           additionalProperties: false, // <-- each property must be an object with a "type" of "string"
                         },
-                        description:
-                          'The parameters of the function, written in JSON Schema format',
                       },
                     },
                     required: ['type', 'properties'],
