@@ -18,7 +18,7 @@
       </div>
       <div class="action-cards">
         @for( action of displayedActions(); track $index) {
-        <action-card [action]="action" />
+        <action-card [action]="action" (actionStatusChanged)="updateActionStatus(action._id, $event)" />
         }
       </div>
 

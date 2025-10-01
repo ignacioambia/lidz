@@ -1,3 +1,5 @@
+import { AgentAction } from "../agent-action";
+
 export namespace PatchInstructionsNamespace {
     export type Request = {
         instructions: string;
@@ -5,6 +7,7 @@ export namespace PatchInstructionsNamespace {
 
     export type Response = {
         agentId: string;
-        message: string;
-    }
+        instructions: string;
+        actions: AgentAction[];
+    };
 }

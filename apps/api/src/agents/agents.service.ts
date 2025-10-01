@@ -4,8 +4,8 @@ import { UpdateAgentInstructionsDto } from './dto/update-agent-instructions.dto'
 import { InjectModel } from '@nestjs/mongoose';
 import { Agent, AgentDocument } from '../schemas/agent.schema';
 import { Model, Types } from 'mongoose';
-import { run } from '@openai/agents';
-import { AgentsAPI } from '@lidz/shared';
+import { run, tool } from '@openai/agents';
+import { AgentAction, AgentActionStatus, AgentsAPI } from '@lidz/shared';
 import { agentManager } from './agent-manager.agent';
 
 @Injectable()
@@ -19,8 +19,13 @@ export class AgentsService {
     createAgentDto: CreateAgentDto,
     providerId: Types.ObjectId,
   ): Promise<AgentsAPI.Post.Response> {
+    const actionsFound = await this.detectRequiredActions(
+      createAgentDto.instructions,
+    );
+
     const { agentId } = await this.agentModel.create({
       ...createAgentDto,
+      actions: actionsFound,
       providerId,
     });
     return { agentId };
@@ -30,13 +35,18 @@ export class AgentsService {
     return `This action returns all agents`;
   }
 
-  async detectRequiredActions(instructions: string): Promise<string[]> {
+  async detectRequiredActions(instructions: string): Promise<AgentAction[]> {
     const actionsFound = await run(
       agentManager,
       `¿Las siguientes instrucciones requieren de alguna acción?\n\n${instructions}`,
     );
 
-    return (actionsFound.finalOutput as { actions: string[] }).actions;
+    return (actionsFound.finalOutput as { actions: AgentAction[] }).actions.map(
+      (action) => ({
+        ...action,
+        status: 'pending',
+      }),
+    );
   }
 
   async findOne(agentId: string): Promise<AgentsAPI.GetById.Response> {
@@ -48,6 +58,7 @@ export class AgentsService {
       instructions: agent.instructions,
       createdAt: agent.createdAt.toISOString(),
       updatedAt: agent.updatedAt.toISOString(),
+      actions: agent.actions,
     };
   }
 
@@ -55,16 +66,19 @@ export class AgentsService {
     agentId: string,
     { instructions }: UpdateAgentInstructionsDto,
   ): Promise<AgentsAPI.PatchInstructions.Response> {
-    // const actionsFound = await this.detectRequiredActions(instructions);
+    const updateObject = { instructions };
+
+    const actionsFound = await this.detectRequiredActions(instructions);
+
+    if (actionsFound.length) {
+      updateObject['actions'] = actionsFound;
+    }
 
     const agent = await this.agentModel
-      .findOneAndUpdate(
-        { agentId },
-        { instructions },
-        {
-          new: true,
-        },
-      )
+      .findOneAndUpdate({ agentId }, updateObject, {
+        new: true,
+        runValidators: true,
+      })
       .exec();
 
     if (!agent) {
@@ -73,7 +87,25 @@ export class AgentsService {
 
     return {
       agentId: agent.agentId,
-      message: 'Instrucciones actualizadas con éxito',
+      instructions: agent.instructions,
+      actions: agent.actions,
+    };
+  }
+
+  async updateActionStatus(
+    status: AgentActionStatus,
+    actionId: Types.ObjectId,
+    agentId: string,
+  ): Promise<AgentsAPI.PatchActionStatus.Response> {
+    await this.agentModel.updateOne(
+      { agentId, 'actions._id': actionId },
+      { $set: { 'actions.$.status': status as string } },
+    );
+
+    return {
+      message: 'Action status updated successfully',
+      actionId: actionId.toString(),
+      status,
     };
   }
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AgentsAPI } from '@lidz/shared';
+import { AgentActionStatus, AgentsAPI } from '@lidz/shared';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +25,15 @@ export class AgentsService {
   public getById(agentId: string): Observable<AgentsAPI.GetById.Response> {
     return this.http
       .get<AgentsAPI.GetById.Response>(`/agents/${agentId}`);
+  }
+
+  public updateActionStatus(
+    agentId: string,
+    actionId: string,
+    status: AgentActionStatus,
+  ): Observable<AgentsAPI.PatchActionStatus.Response> {
+    const payload: AgentsAPI.PatchActionStatus.Request = { status };
+    return this.http
+      .patch<AgentsAPI.PatchActionStatus.Response>(`/agents/${agentId}/actions/${actionId}/status`, payload);
   }
 }

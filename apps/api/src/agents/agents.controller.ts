@@ -12,6 +12,7 @@ import { AgentsService } from './agents.service';
 import { CreateAgentDto } from './dto/create-agent.dto';
 import { UpdateAgentInstructionsDto } from './dto/update-agent-instructions.dto';
 import { Types } from 'mongoose';
+import { UpdateAgentActionStatusDto } from './dto/update-agent-action-status.dto';
 
 @Controller('agents')
 export class AgentsController {
@@ -32,7 +33,9 @@ export class AgentsController {
   }
 
   @Get(':agentId')
-  findOne(@Param('agentId') agentId: string) {
+  findOne(
+    @Param('agentId') agentId: string,
+  ): Promise<AgentsAPI.GetById.Response> {
     return this.agentsService.findOne(agentId);
   }
 
@@ -42,6 +45,19 @@ export class AgentsController {
     @Body() updateAgentDto: UpdateAgentInstructionsDto,
   ): Promise<AgentsAPI.PatchInstructions.Response> {
     return this.agentsService.updateInstructions(agentId, updateAgentDto);
+  }
+
+  @Patch(':agentId/actions/:actionId/status')
+  updateActionStatus(
+    @Param('agentId') agentId: string,
+    @Param('actionId') actionId: string,
+    @Body() body: UpdateAgentActionStatusDto,
+  ): Promise<AgentsAPI.PatchActionStatus.Response> {
+    return this.agentsService.updateActionStatus(
+      body.status,
+      new Types.ObjectId(actionId),
+      agentId,
+    );
   }
 
   @Delete(':id')

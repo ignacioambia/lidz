@@ -1,8 +1,24 @@
+import { AgentAction, AgentActionStatus } from '@lidz/shared';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 import { nanoid } from 'nanoid';
 
 export type AgentDocument = Agent & Document;
+
+@Schema()
+export class AgentActionModel {
+  @Prop({ required: true })
+  type: string;
+
+  @Prop({ required: true, enum: ['pending', 'confirmed', 'rejected'] })
+  status: AgentActionStatus;
+
+  @Prop({ type: Object, required: true })
+  tool: Record<string, any>;
+}
+
+export type AgentActionDocument = AgentActionModel & Document;
+export const AgentActionSchema = SchemaFactory.createForClass(AgentActionModel);
 
 @Schema({ timestamps: true })
 export class Agent {
@@ -24,6 +40,9 @@ export class Agent {
 
   @Prop({ default: true })
   isActive: boolean;
+
+  @Prop({ type: [AgentActionSchema], default: [] })
+  actions: AgentAction[];
 
   createdAt: Date;
 

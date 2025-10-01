@@ -2,7 +2,7 @@ import { Component, computed, effect, inject, signal } from '@angular/core';
 import { Location } from '@angular/common';
 import { ChatSandbox } from './chat-sandbox/chat-sandbox';
 import { FormsModule } from '@angular/forms';
-import { AgentAction } from '@lidz/shared';
+import { AgentAction, AgentActionStatus } from '@lidz/shared';
 import { ActivatedRoute } from '@angular/router';
 import { AgentsService } from '../../services/agents-service';
 import { ActionCard } from './action-card/action-card';
@@ -16,23 +16,7 @@ import { Button } from '../../button/button';
 })
 export class AgentManager {
   public instructions = signal<string>('');
-  private actions = signal<AgentAction[]>([
-    {
-      type: 'notification',
-      status: 'rejected',
-      tool: {
-        name: 'notificar_seleccion_de_fruta',
-        description:
-          'Notifica cuando el usuario haya seleccionado una fruta de la lista proporcionada.',
-        parameters: {
-          primer_tiempo: 'Nombre de la fruta seleccionada por el usuario.',
-          segundo_tiempo:
-            'Nombre de la otra fruta seleccionada por el usuario.',
-          tercer_tiempo: 'Nombre de la otra fruta seleccionada por el usuario.',
-        },
-      },
-    },
-  ]);
+  private actions = signal<AgentAction[]>([]);
 
   public displayedActions = computed(() =>
     this.showRejected()
@@ -54,7 +38,7 @@ export class AgentManager {
       this.agentsService.getById(agentId).subscribe({
         next: (response) => {
           this.instructions.set(response.instructions);
-          console.log('Just received instructions', this.instructions());
+          this.actions.set(response.actions);
         },
         error: (err) => {
           console.error('Error fetching agent details', err);
@@ -86,6 +70,9 @@ export class AgentManager {
     this.agentsService
       .updateInstructions(this.agentId(), this.instructions())
       .subscribe({
+        next: (response) => {
+          this.actions.set(response.actions);
+        },
         error: (err) => {
           console.error('Error updating instructions ', err);
         },
@@ -93,7 +80,21 @@ export class AgentManager {
   }
 
   public onShowRejectedChange(event: Event) {
-    console.log('Calling setting rejected');
     this.showRejected.set((event.target as HTMLInputElement).checked);
+  }
+
+  public updateActionStatus(actionId: string, status: AgentActionStatus) {
+    this.agentsService.updateActionStatus(this.agentId(), actionId, status).subscribe({
+      next: () => {
+        this.actions.set(
+          this.actions().map((action) =>
+            action._id === actionId ? { ...action, status } : action
+          )
+        );
+      },
+      error: (err) => {
+        console.error('Error updating action status', err);
+      },
+    });
   }
 }

@@ -1,11 +1,20 @@
+export type AgentActionStatus = 'pending' | 'confirmed' | 'rejected';
+
 export interface AgentAction {
+  _id: string;
   type: "notification";
-  status: "pending" | "confirmed" | "rejected";
+  status: AgentActionStatus;
   tool: {
     name: string;
     description: string;
     parameters: {
-      [key: string]: string;
+      type: 'object';
+      properties: {
+        [key: string]: {
+          type: 'string';
+          description: string;
+        };
+      }
     };
   };
 }
