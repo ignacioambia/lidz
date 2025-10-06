@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { HydratedDocument, Model } from 'mongoose';
 import { Agent, AgentInputItem, run } from '@openai/agents';
 import { TwilioWebhookBody } from 'src/app.controller';
 import {
@@ -37,6 +37,7 @@ export class ChatsService {
       //TODO: Replace with dynamic name, Name functionality to be added in the future
       name: 'WhatsApp Assistant',
       instructions: `${agentData.instructions}\n\n${this.formattingInstructions}`,
+      tools: this.agentsService.getAgentFunctionTools(agentData.actions),
     });
 
     // Get conversation history from database
@@ -47,34 +48,34 @@ export class ChatsService {
 
     const newMessage: AgentInputItem = { content: message.Body, role: 'user' };
     // Process with AI agent
-    const result = await run(agent, [...conversationHistory, newMessage]);
+    const result = await run(agent, conversationHistory.concat(newMessage));
 
-    // Save both user message and bot response to database
+    // Save both user message and agent response to database
     void this.saveMessage(agentId, userId, newMessage);
 
     const lastMessage = result.history[result.history.length - 1];
     void this.saveMessage(agentId, userId, lastMessage);
 
-    const botResponse = result.finalOutput || '';
-    return botResponse;
+    const agentResponse = result.finalOutput || '';
+    return agentResponse;
   }
 
   private async getConversationHistory(
     userId: string,
     assistantId: string,
   ): Promise<AgentInputItem[]> {
+    let conversation: HydratedDocument<ConversationDocument> | null;
     // Find existing conversation
-    const conversation = await this.conversationModel.findOne({
+    conversation = await this.conversationModel.findOne({
       assistantId,
       userId,
     });
 
     if (!conversation) {
-      const newConversation = await this.conversationModel.create({
+      conversation = await this.conversationModel.create({
         assistantId: assistantId,
         userId: userId,
       });
-      return newConversation.messages;
     }
     // Convert messages to AgentInputItem format
     return conversation.messages;

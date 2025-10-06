@@ -4,15 +4,17 @@ import { UpdateAgentInstructionsDto } from './dto/update-agent-instructions.dto'
 import { InjectModel } from '@nestjs/mongoose';
 import { Agent, AgentDocument } from '../schemas/agent.schema';
 import { Model, Types } from 'mongoose';
-import { run, tool } from '@openai/agents';
+import { FunctionTool, run, tool } from '@openai/agents';
 import { AgentAction, AgentActionStatus, AgentsAPI } from '@lidz/shared';
 import { agentManager } from './agent-manager.agent';
+import { ActionsService } from 'src/actions/actions.service';
 
 @Injectable()
 export class AgentsService {
   constructor(
     @InjectModel(Agent.name)
     private agentModel: Model<AgentDocument>,
+    private actionsService: ActionsService,
   ) {}
 
   async create(
@@ -45,6 +47,22 @@ export class AgentsService {
       (action) => ({
         ...action,
         status: 'pending',
+      }),
+    );
+  }
+
+  getAgentFunctionTools(actions: AgentAction[]): FunctionTool[] {
+    return actions.map(({ tool: storedTool, type }) =>
+      tool({
+        name: storedTool.name,
+        description: storedTool.description,
+        parameters: {
+          type: 'object',
+          properties: storedTool.parameters.properties,
+          required: Object.keys(storedTool.parameters.properties),
+          additionalProperties: false,
+        },
+        execute: this.actionsService.getActionHandler(type),
       }),
     );
   }
