@@ -5,7 +5,6 @@
     box-sizing: border-box;
     min-width: 22rem;
     
-
     .header {
         border-bottom: 1px solid #27272a19;
         padding: 1rem;
@@ -31,11 +30,12 @@
         }
 
         .message {
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1rem;
             background-color: gray;
             color: white;
             border-radius: 0.8rem;
             max-width: 70%;
+            font-weight: 300;
 
             &.user {
                 border-bottom-right-radius: 0.25rem;
