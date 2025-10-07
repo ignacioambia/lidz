@@ -35,6 +35,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "./",
               "budgets": [
                 {
                   "type": "initial",
@@ -94,5 +95,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "7b5b40a8-dc50-41c6-b931-f6ce7cf840bf"
   }
 }
