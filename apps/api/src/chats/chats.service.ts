@@ -62,18 +62,18 @@ export class ChatsService {
 
   private async getConversationHistory(
     userId: string,
-    assistantId: string,
+    agentId: string,
   ): Promise<AgentInputItem[]> {
     let conversation: HydratedDocument<ConversationDocument> | null;
     // Find existing conversation
     conversation = await this.conversationModel.findOne({
-      assistantId,
+      agentId,
       userId,
     });
 
     if (!conversation) {
       conversation = await this.conversationModel.create({
-        assistantId: assistantId,
+        agentId: agentId,
         userId: userId,
       });
     }
@@ -82,14 +82,14 @@ export class ChatsService {
   }
 
   private async saveMessage(
-    assistantId: string,
+    agentId: string,
     userId: string,
     newMessage: AgentInputItem,
   ): Promise<void> {
     try {
       // Find or create conversation
       await this.conversationModel.updateOne(
-        { assistantId, userId },
+        { agentId, userId },
         {
           $push: { messages: newMessage },
         },

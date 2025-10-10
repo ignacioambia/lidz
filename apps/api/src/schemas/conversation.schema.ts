@@ -7,7 +7,7 @@ export type ConversationDocument = Conversation & Document;
 @Schema({ timestamps: true })
 export class Conversation {
   @Prop({ required: true })
-  assistantId: string; // Phone number or user ID
+  agentId: string; // Phone number or user ID
 
   @Prop({ required: true })
   userId: string; // Bot phone number or ID
