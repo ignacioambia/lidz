@@ -1,0 +1,15 @@
+<div class="navigation-bar-wrapper">
+    <a class="item" #rlaActions="routerLinkActive" routerLink="actions" routerLinkActive="active">
+        <ng-icon [name]="rlaActions.isActive ? 'heroBoltSolid' : 'heroBolt'"></ng-icon>
+        <p>Acciones</p>
+    </a>
+
+    <a class="item" #rlaChats="routerLinkActive" routerLink="chats" routerLinkActive="active">
+        <ng-icon [name]="rlaChats.isActive ? 'heroChatBubbleLeftSolid' : 'heroChatBubbleLeft'"></ng-icon>
+        <p>Chats</p>
+    </a>
+    <a class="item" #rlaSettings="routerLinkActive" routerLink="settings" routerLinkActive="active">
+        <ng-icon [name]="rlaSettings.isActive ? 'heroCogSolid' : 'heroCog'"></ng-icon>
+        <p>Ajustes</p>
+    </a>
+</div>

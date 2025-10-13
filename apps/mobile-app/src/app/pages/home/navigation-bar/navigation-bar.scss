@@ -1,0 +1,38 @@
+.navigation-bar-wrapper {
+    display: flex;
+    // background: oklch(95.3% 0.051 180.801);
+    border-top: 1px solid var(--muted-color);
+    padding-bottom: 0.5rem;
+
+    .item {
+        color: var(--text-strong-color);
+        flex-grow: 1;
+        text-align: center;
+        margin: 0.5rem;
+        text-decoration: none;
+        color: #14b8a6;
+
+        /* Remove blue/gray tap highlight on iOS/Android (WebKit/Blink) */
+        -webkit-tap-highlight-color: transparent;
+
+        &:active {
+            background: none;
+        }
+
+        /* Keep/adjust focus styling for accessibility */
+        &:focus { outline: none; }
+        &:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 2px;
+        }
+
+        &.active {
+            font-weight: 500;
+        }
+
+        p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+    }
+}

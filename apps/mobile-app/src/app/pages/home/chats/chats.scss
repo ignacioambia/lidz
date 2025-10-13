@@ -1,0 +1,15 @@
+.no-chats{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+
+    ng-icon{
+        color: var(--muted-color);
+        margin-bottom: 1rem;
+    }
+
+}
