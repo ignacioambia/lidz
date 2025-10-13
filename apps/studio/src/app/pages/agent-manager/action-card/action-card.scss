@@ -1,5 +1,5 @@
 .action-card {
-  border: 1px solid #27272a19;
+  border: 1px solid var(--muted-color);
   border-radius: 0.5rem;
   padding: 0.5rem;
   background: white;
@@ -11,7 +11,7 @@
 
   hr {
     border: none;
-    border-top: 1px solid #27272a19;
+    border-top: 1px solid var(--muted-color);
   }
 
   .title {
@@ -33,12 +33,10 @@
   }
 
   .property {
-    border-left: 3px solid #14b8a6;
-    // border-radius: 0.5rem;
-    background-color: oklch(95.3% 0.051 180.801);
+    border-left: 3px solid var(--secondary-color);
+    background-color: hsl(from var(--secondary-color) h s l / 0.2);
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
-    color: oklch(38.6% 0.063 188.416);
     font-size: 0.875rem;
 
     .name {

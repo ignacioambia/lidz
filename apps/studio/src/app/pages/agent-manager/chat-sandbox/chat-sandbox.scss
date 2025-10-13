@@ -40,7 +40,7 @@
             &.user {
                 border-bottom-right-radius: 0.25rem;
                 align-self: flex-end;
-                background-color: #128C7E;
+                background: var(--primary-color);
             }
 
             &.bot {

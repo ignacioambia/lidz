@@ -7,34 +7,34 @@
     transition: background-color 0.3s ease;
 
     // Default (confirm) styles
-    background-color: oklch(51.1% 0.096 186.391);
+    // background-color: linear-gradient(to right, #06b6d4, #3b82f6); // teal to blue
     color: white;
     border: none;
 
     &[data-variant='outline'] {
         background-color: transparent;
-        border: 1px solid oklch(51.1% 0.096 186.391);
-        color: oklch(51.1% 0.096 186.391);
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
 
         &:hover {
-            background-color: oklch(51.1% 0.096 186.391);
+            background-color: var(--primary-color);
             color: white;
         }
     }
 
     &[data-type='confirm'] {
-        background-color: oklch(51.1% 0.096 186.391);
+        background: linear-gradient(90deg,var(--primary-color), var(--secondary-color));
         color: white;
         border: none;
 
         &[data-variant='outline'] {
-            background-color: transparent;
-            color: oklch(51.1% 0.096 186.391);
-            border: 1px solid oklch(51.1% 0.096 186.391);
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
 
             &:hover {
                 background-color: #f0fdfa; // even lighter teal
-                color: oklch(51.1% 0.096 186.391);
+                color: var(--primary-color);
             }
         }
 

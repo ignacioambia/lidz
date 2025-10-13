@@ -240,6 +240,9 @@ importers:
       '@lidz/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@lidz/shared-styles':
+        specifier: workspace:*
+        version: link:../../packages/ui-workspace/shared-styles
       rxjs:
         specifier: ~7.8.0
         version: 7.8.2
