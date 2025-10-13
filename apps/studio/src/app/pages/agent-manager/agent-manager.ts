@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AgentAction, AgentActionStatus } from '@lidz/shared';
 import { ActivatedRoute } from '@angular/router';
 import { AgentsService } from '../../services/agents-service';
-import { ActionCard } from './action-card/action-card';
+import { ActionCard } from './action-card-template/action-card-template';
 import { Button } from '../../button/button';
 
 @Component({

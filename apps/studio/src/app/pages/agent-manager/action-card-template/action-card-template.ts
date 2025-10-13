@@ -3,10 +3,10 @@ import { AgentAction, AgentActionStatus } from '@lidz/shared';
 import { Button } from '../../../button/button';
 
 @Component({
-  selector: 'action-card',
+  selector: 'action-card-template',
   imports: [Button],
-  templateUrl: './action-card.html',
-  styleUrl: './action-card.scss',
+  templateUrl: './action-card-template.html',
+  styleUrl: './action-card-template.scss',
 })
 export class ActionCard {
   action = input<AgentAction>();

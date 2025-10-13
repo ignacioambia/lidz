@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActionCard } from './action-card';
+import { ActionCard } from './action-card-template';
 
 describe('ActionCard', () => {
   let component: ActionCard;
