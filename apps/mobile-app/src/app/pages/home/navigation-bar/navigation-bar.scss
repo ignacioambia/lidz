@@ -10,7 +10,7 @@
         text-align: center;
         margin: 0.5rem;
         text-decoration: none;
-        color: #14b8a6;
+        color: var(--primary-color);
 
         /* Remove blue/gray tap highlight on iOS/Android (WebKit/Blink) */
         -webkit-tap-highlight-color: transparent;

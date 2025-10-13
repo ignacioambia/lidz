@@ -28,6 +28,7 @@
     "@capacitor/cli": "^7.4.3",
     "@capacitor/core": "^7.4.3",
     "@capacitor/ios": "^7.4.3",
+    "@lidz/shared-styles": "workspace:*",
     "@ng-icons/core": "^32.1.0",
     "@ng-icons/heroicons": "^32.1.0",
     "rxjs": "~7.8.0",
