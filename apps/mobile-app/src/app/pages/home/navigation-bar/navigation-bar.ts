@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// import { faComments, faBolt } from '@fortawesome/free-solid-svg-icons';
 import { heroBolt, heroChatBubbleLeft, heroCog } from '@ng-icons/heroicons/outline';
 import {
   heroBoltSolid,
