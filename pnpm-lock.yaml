@@ -164,6 +164,12 @@ importers:
       '@capacitor/ios':
         specifier: ^7.4.3
         version: 7.4.3(@capacitor/core@7.4.3)
+      '@ng-icons/core':
+        specifier: ^32.1.0
+        version: 32.1.0(@angular/common@20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
+      '@ng-icons/heroicons':
+        specifier: ^32.1.0
+        version: 32.1.0
       rxjs:
         specifier: ~7.8.0
         version: 7.8.2
@@ -1505,6 +1511,16 @@ packages:
         optional: true
       '@nestjs/platform-express':
         optional: true
+
+  '@ng-icons/core@32.1.0':
+    resolution: {integrity: sha512-QMZSJIZYFg6THQKL9cQDEf7IbBcALcM09wCBmlIf0slmozRWcNJR25T9huiXy9/15OH1APegaRW+606e9bsOIg==}
+    peerDependencies:
+      '@angular/common': '>=20.0.0'
+      '@angular/core': '>=20.0.0'
+      rxjs: ^6.5.3 || ^7.4.0
+
+  '@ng-icons/heroicons@32.1.0':
+    resolution: {integrity: sha512-Vn7MaxCsUKefAt822chmlor0JtyRrZcydvtElU5AaKXiqyQ8oy5DW0cLv8tB9OyY//bo97WHIQ0JbgAYWzGAgA==}
 
   '@noble/hashes@1.8.0':
     resolution: {integrity: sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A==}
@@ -7043,6 +7059,17 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@nestjs/platform-express': 11.1.6(@nestjs/common@11.1.6(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.6)
+
+  '@ng-icons/core@32.1.0(@angular/common@20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)':
+    dependencies:
+      '@angular/common': 20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
+      '@angular/core': 20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1)
+      rxjs: 7.8.2
+      tslib: 2.8.1
+
+  '@ng-icons/heroicons@32.1.0':
+    dependencies:
+      tslib: 2.8.1
 
   '@noble/hashes@1.8.0': {}
 
