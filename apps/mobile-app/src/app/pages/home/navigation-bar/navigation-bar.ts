@@ -20,7 +20,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       heroCogSolid,
       heroCog,
     }),
-    provideNgIconsConfig({ size: '1.5rem' }),
+    provideNgIconsConfig({ size: '1.7rem' }),
   ],
   templateUrl: './navigation-bar.html',
   styleUrl: './navigation-bar.scss',
