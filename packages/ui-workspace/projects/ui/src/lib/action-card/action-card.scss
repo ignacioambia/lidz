@@ -1,0 +1,59 @@
+.action-card {
+  border: 1px solid var(--muted-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  background: white;
+  // min-height: 100%;
+  // margin: 8px 0;
+  // background-color: #f9f9f9;
+  font-size: 1rem;
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--muted-color);
+  }
+
+  .title, .description {
+    margin: 0;
+  }
+
+  .details {
+    margin: 0.6rem 0;
+  .title {
+    font-weight: 600;
+  }
+  .description {
+    color: #595959;
+  }
+  }
+  
+
+
+  
+
+  .property {
+    border-left: 3px solid var(--secondary-color);
+    background-color: hsl(from var(--secondary-color) h s l / 0.2);
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+
+    .name {
+      font-weight: 600;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
+
+  .date {
+    text-align: right;
+    color: var(--text-color);
+    font-weight: 200;
+    font-size: 0.9rem;
+  }
+}

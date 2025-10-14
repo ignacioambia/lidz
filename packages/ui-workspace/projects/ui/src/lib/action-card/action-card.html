@@ -1,0 +1,20 @@
+<div class="action-card" [class]="action()?.status">
+    <div class="date">Hoy a la 13:30</div>
+    <div class="details">
+        <p class="title">{{ title() }}</p>
+        <p class="description">{{ action()?.description }}</p>
+    </div>
+
+    <hr />
+    <strong>De:</strong>
+    <span>{{ action()?.user?.phoneNumber }}</span>
+    <hr />
+
+    <i>Propiedades:</i>
+    @for (property of properties(); track $index) {
+    <div class="property">
+        <div class="name">{{ property.name }}</div>
+        <div>{{ property.description }}</div>
+    </div>
+    }
+</div>
