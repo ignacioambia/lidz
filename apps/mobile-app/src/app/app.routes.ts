@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { Chats } from './pages/home/chats/chats';
+import { Actions } from './pages/home/actions/actions';
+import { Settings } from './pages/home/settings/settings';
 
 export const routes: Routes = [
     {
@@ -13,15 +16,15 @@ export const routes: Routes = [
             { path: '', redirectTo: 'actions', pathMatch: 'full' },
             {
                 path: 'chats',
-                loadComponent: () => import('./pages/home/chats/chats').then(m => m.Chats)
+                component: Chats
             },
             {
                 path: 'actions',
-                loadComponent: () => import('./pages/home/actions/actions').then(m => m.Actions)
+                component: Actions
             },
             {
                 path: 'settings',
-                loadComponent: () => import('./pages/home/settings/settings').then(m => m.Settings)
+                component: Settings
             },
         ]
     },
