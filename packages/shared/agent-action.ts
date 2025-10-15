@@ -1,20 +1,15 @@
-export type AgentActionStatus = 'pending' | 'confirmed' | 'rejected';
-
 export interface AgentAction {
-  _id: string;
+  id: string;
   type: "notification";
-  status: AgentActionStatus;
-  tool: {
-    name: string;
-    description: string;
-    parameters: {
-      type: 'object';
-      properties: {
-        [key: string]: {
-          type: 'string';
-          description: string;
-        };
-      }
-    };
+  name: string;
+  description: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  user: {
+    phoneNumber: string;
+  };
+  parameters: {
+    [key: string]: string;
   };
 }

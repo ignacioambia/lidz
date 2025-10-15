@@ -1,4 +1,4 @@
-import { AgentAction, AgentActionStatus } from "../agent-action";
+import { AgentAction, AgentActionStatus } from "../agent-action-template";
 
 export namespace PatchActionStatusNamespace {
     export type Request = {
