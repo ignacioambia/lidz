@@ -6,10 +6,18 @@
     align-items: center;
     text-align: center;
     padding: 1rem;
+    overflow-y: scroll;
 
     ng-icon{
         color: var(--muted-color);
         margin-bottom: 1rem;
     }
 
+}
+
+.actions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: scroll;
 }
