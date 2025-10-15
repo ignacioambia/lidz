@@ -5,9 +5,10 @@ import { Injectable } from '@nestjs/common';
 export class ActionsService {
   private readonly actionHandlers: Record<
     AgentActionType,
-    (input: unknown) => void | Promise<void>
+    (input: unknown, context: unknown, details: unknown) => void | Promise<void>
   > = {
-    notification: (input) => this.handleNotification(input),
+    notification: (input, context, details) =>
+      this.handleNotification(input, context, details),
   };
 
   public getActionHandler(type: AgentActionType) {
@@ -18,7 +19,16 @@ export class ActionsService {
     return handler;
   }
 
-  private handleNotification(input: unknown): void {
-    console.log('Notification action executed with input:', input);
+  private handleNotification(
+    input: unknown,
+    context: unknown,
+    details: unknown,
+  ): void {
+    console.log(
+      'Notification action executed with input:',
+      input,
+      context,
+      details,
+    );
   }
 }
