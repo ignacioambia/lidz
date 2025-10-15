@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@lidz/ui": ["packages/ui-workspace/projects/ui/src/public-api.ts"],
+      "@lidz/shared": ["packages/shared/index.ts"],
+    }
+  }
+}

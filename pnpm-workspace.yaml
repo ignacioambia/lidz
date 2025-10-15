@@ -1,6 +1,7 @@
 packages:
   - apps/*
   - packages/*
-  - packages/ui-workspace/*
+  - packages/ui-workspace/shared-styles
+  - packages/ui-workspace/projects/*
 onlyBuiltDependencies:
   - '@nestjs/core'
