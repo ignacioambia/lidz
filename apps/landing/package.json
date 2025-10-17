@@ -6,7 +6,9 @@
     "dev": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "docker:build": "pnpm build && docker build --platform linux/amd64 -f Dockerfile . -t landing",
+    "docker:run": "docker run -d -p 3000:3000 --name landing-container landing"
   },
   "prettier": {
     "overrides": [
