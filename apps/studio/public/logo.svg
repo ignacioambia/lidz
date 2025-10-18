@@ -13,10 +13,10 @@
    xmlns:svg="http://www.w3.org/2000/svg"><defs
      id="defs1"><linearGradient
        id="linearGradient21"><stop
-         style="stop-color:#a3e635;stop-opacity:1;"
+         style="stop-color:#00ff88ff;stop-opacity:1;"
          offset="0"
          id="stop20" /><stop
-         style="stop-color:#1abc4b;stop-opacity:1;"
+         style="stop-color:#00c853ff;stop-opacity:1;"
          offset="1"
          id="stop21" /></linearGradient><filter
        style="color-interpolation-filters:sRGB"
