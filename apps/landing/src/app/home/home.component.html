@@ -17,6 +17,26 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .logo-text {
+    display: inline-block;
+    img {
+      width: 15rem;
+    }
+    margin-bottom: 1.5rem;
+  }
+
+
+  .logo-icon {
+    margin-top: 5vh;
+    img {
+      width: 12rem;
+    }
+    text-align: center;
+    /* display: inline-block; */
+    margin-bottom: 1.5rem;
+
+  }
+
   .home-container {
     margin: 0;
     padding: 0;
@@ -39,13 +59,6 @@
     animation: fadeInUp 1s ease-out;
   }
 
-  .fire-logo {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 2rem;
-    animation: flicker 2s ease-in-out infinite alternate;
-    filter: drop-shadow(0 0 20px var(--primary-color));
-  }
 
   @keyframes flicker {
     0%, 100% { 
@@ -290,10 +303,12 @@
   </div>
 
   <div class="hero-section">
-    <div class="fire-logo">
-      🔥
+    <div class="logo-icon">
+      <img src="logo-icon.svg" alt="IGNIA Logo icon">
     </div>
-    <h1 class="brand-name">IGNIA</h1>
+    <div class="logo-text">
+      <img src="logo-text.svg" alt="IGNIA Logo text">
+    </div>
     <p class="tagline">Donde las Ideas Prenden Fuego</p>
     <p class="subtitle">Encendiendo la innovación, una chispa a la vez</p>
   </div>
