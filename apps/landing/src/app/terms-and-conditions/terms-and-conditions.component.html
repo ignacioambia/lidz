@@ -1,0 +1,456 @@
+<!-- Términos y Condiciones - Ignia 🔥 -->
+
+<style>
+  :host {
+    --fire-red: #ff4500;
+    --fire-orange: #ff6b00;
+    --fire-yellow: #ffb000;
+    --fire-deep: #cc2400;
+    --smoke-gray: #2d2d2d;
+    --smoke-light: #4a4a4a;
+    --ash-white: #f5f5f5;
+    --ember-glow: #ff8c42;
+    
+    --fire-gradient: linear-gradient(
+      45deg,
+      var(--fire-deep) 0%,
+      var(--fire-red) 30%,
+      var(--fire-orange) 60%,
+      var(--fire-yellow) 100%
+    );
+
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .terms-container {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 69, 0, 0.1) 0%, transparent 70%);
+  }
+
+  .header-section {
+    text-align: center;
+    max-width: 800px;
+    margin-bottom: 3rem;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .fire-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    animation: flicker 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 20px rgba(255, 69, 0, 0.6));
+  }
+
+  @keyframes flicker {
+    0%, 100% { 
+      filter: drop-shadow(0 0 20px rgba(255, 69, 0, 0.6)) brightness(1);
+    }
+    50% { 
+      filter: drop-shadow(0 0 30px rgba(255, 140, 66, 0.8)) brightness(1.2);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .page-title {
+    font-size: 3rem;
+    font-weight: 600;
+    background: var(--fire-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 1rem 0;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.02em;
+  }
+
+  .page-subtitle {
+    font-size: 1.2rem;
+    color: var(--ember-glow);
+    margin: 0 0 2rem 0;
+    font-style: italic;
+  }
+
+  .content-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    max-width: 1000px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+
+  .content-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: var(--fire-gradient);
+    border-radius: 20px;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0.3;
+  }
+
+  .section-title {
+    color: var(--fire-orange);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .section-content {
+    color: var(--smoke-gray);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-content h3 {
+    color: var(--fire-red);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem 0;
+  }
+
+  .section-content ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .section-content li {
+    margin-bottom: 0.8rem;
+  }
+
+  .section-content strong {
+    color: var(--fire-deep);
+    font-weight: 600;
+  }
+
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--fire-gradient);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .back-button:hover::before {
+    left: 100%;
+  }
+
+  .back-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 69, 0, 0.6);
+  }
+
+  .floating-embers {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+  }
+
+  .ember {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--fire-orange);
+    border-radius: 50%;
+    animation: float 8s linear infinite;
+    opacity: 0.5;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.5;
+    }
+    90% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(-100px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(255, 69, 0, 0.1) 0%, rgba(255, 140, 66, 0.1) 100%);
+    border-left: 4px solid var(--fire-orange);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+  }
+
+  .contact-info {
+    background: rgba(245, 245, 245, 0.9);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    .page-title {
+      font-size: 2.2rem;
+    }
+    
+    .content-section {
+      padding: 2rem;
+      margin: 1rem;
+    }
+    
+    .terms-container {
+      padding: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<div class="terms-container">
+  <div class="floating-embers">
+    <div class="ember" style="left: 15%; animation-delay: -1s;"></div>
+    <div class="ember" style="left: 35%; animation-delay: -3s;"></div>
+    <div class="ember" style="left: 55%; animation-delay: -5s;"></div>
+    <div class="ember" style="left: 75%; animation-delay: -2s;"></div>
+    <div class="ember" style="left: 85%; animation-delay: -4s;"></div>
+  </div>
+
+  <div class="header-section">
+    <div class="fire-logo">📜</div>
+    <h1 class="page-title">Términos y Condiciones</h1>
+    <p class="page-subtitle">Las reglas del juego para encender tu fuego 🔥</p>
+  </div>
+
+  <a routerLink="/" class="back-button">
+    ⬅️ Volver al Inicio
+  </a>
+
+  <div class="content-section">
+    <div class="section-title">
+      📋 1. Aceptación de los Términos
+    </div>
+    <div class="section-content">
+      <p>
+        Al acceder y utilizar <strong>IGNIA</strong>, aceptas estos términos y condiciones en su totalidad. 
+        Si no estás de acuerdo con alguna parte de estos términos, te pedimos que no utilices nuestros servicios.
+      </p>
+      <div class="highlight-box">
+        <p>💡 <strong>¡Importante!</strong> Estos términos pueden actualizarse ocasionalmente. Te notificaremos de cualquier cambio significativo.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      🔥 2. Descripción del Servicio
+    </div>
+    <div class="section-content">
+      <p>
+        <strong>IGNIA</strong> es una plataforma innovadora que "enciende las ideas" proporcionando herramientas y servicios para:
+      </p>
+      <ul>
+        <li>🚀 Acelerar el desarrollo de proyectos</li>
+        <li>🎯 Optimizar procesos empresariales</li>
+        <li>🧠 Potenciar la creatividad e innovación</li>
+        <li>⚡ Conectar ideas con resultados tangibles</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      👤 3. Uso Permitido
+    </div>
+    <div class="section-content">
+      <h3>Puedes usar IGNIA para:</h3>
+      <ul>
+        <li>Desarrollar y gestionar tus proyectos personales o comerciales</li>
+        <li>Colaborar con otros usuarios de manera constructiva</li>
+        <li>Acceder a nuestras herramientas y recursos</li>
+        <li>Participar en nuestra comunidad de innovadores</li>
+      </ul>
+      
+      <h3>🚫 No está permitido:</h3>
+      <ul>
+        <li>Utilizar el servicio para actividades ilegales o dañinas</li>
+        <li>Interferir con el funcionamiento de la plataforma</li>
+        <li>Compartir contenido ofensivo, discriminatorio o inapropiado</li>
+        <li>Intentar acceder a datos o cuentas de otros usuarios</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      🔒 4. Privacidad y Protección de Datos
+    </div>
+    <div class="section-content">
+      <p>
+        Tu privacidad es fundamental para nosotros. Nos comprometemos a:
+      </p>
+      <ul>
+        <li>Proteger tu información personal con medidas de seguridad robustas</li>
+        <li>No compartir tus datos con terceros sin tu consentimiento explícito</li>
+        <li>Utilizar la información únicamente para mejorar nuestros servicios</li>
+        <li>Cumplir con las regulaciones de protección de datos aplicables</li>
+      </ul>
+      <div class="highlight-box">
+        <p>🛡️ <strong>Tu control:</strong> Puedes acceder, modificar o eliminar tu información personal en cualquier momento desde tu perfil.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      💡 5. Propiedad Intelectual
+    </div>
+    <div class="section-content">
+      <p>
+        <strong>Tus creaciones son tuyas:</strong> Mantienes todos los derechos sobre el contenido que creas usando IGNIA.
+      </p>
+      <p>
+        <strong>Nuestra plataforma:</strong> IGNIA, su diseño, código fuente, y marca son propiedad de nuestro equipo y están protegidos por derechos de autor y otras leyes de propiedad intelectual.
+      </p>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      ⚖️ 6. Limitación de Responsabilidad
+    </div>
+    <div class="section-content">
+      <p>
+        IGNIA se proporciona "tal como es". Aunque nos esforzamos por ofrecer un servicio excepcional:
+      </p>
+      <ul>
+        <li>No garantizamos que el servicio esté libre de errores o interrupciones</li>
+        <li>No somos responsables por pérdidas de datos o daños indirectos</li>
+        <li>Tu uso del servicio es bajo tu propia responsabilidad</li>
+      </ul>
+      <div class="highlight-box">
+        <p>🛠️ <strong>Nuestro compromiso:</strong> Trabajamos constantemente para mejorar y mantener la calidad de nuestros servicios.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      🔄 7. Modificaciones y Terminación
+    </div>
+    <div class="section-content">
+      <p>
+        Nos reservamos el derecho de:
+      </p>
+      <ul>
+        <li>Modificar o discontinuar características del servicio con previo aviso</li>
+        <li>Actualizar estos términos y condiciones cuando sea necesario</li>
+        <li>Suspender cuentas que violen estos términos</li>
+      </ul>
+      <p>
+        Tú puedes terminar tu cuenta en cualquier momento desde la configuración de tu perfil.
+      </p>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      🌍 8. Ley Aplicable
+    </div>
+    <div class="section-content">
+      <p>
+        Estos términos se rigen por las leyes del país donde opera IGNIA. Cualquier disputa será resuelta mediante negociación amistosa, y si no es posible, a través de los tribunales competentes.
+      </p>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-title">
+      📞 9. Contacto
+    </div>
+    <div class="section-content">
+      <p>
+        Si tienes preguntas sobre estos términos y condiciones, no dudes en contactarnos:
+      </p>
+      <div class="contact-info">
+        <p><strong>📧 Email:</strong> legal@ignia.com</p>
+        <p><strong>📱 Teléfono:</strong> +1 (555) 123-4567</p>
+        <p><strong>🌐 Web:</strong> www.ignia.com/contacto</p>
+        <p><strong>📍 Dirección:</strong> Innovation Street 123, Tech City</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-content" style="text-align: center; border-top: 2px solid var(--fire-orange); padding-top: 2rem;">
+      <p><strong>Última actualización:</strong> Octubre 2025</p>
+      <p style="font-style: italic; color: var(--ember-glow);">
+        Gracias por confiar en IGNIA para encender tus ideas 🔥✨
+      </p>
+    </div>
+  </div>
+</div>
