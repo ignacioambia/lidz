@@ -40,4 +40,15 @@ export class AppController {
     console.log('WhatsApp message status endpoint hit', messageBody);
     return 'Message status';
   }
+
+  @Get('waba')
+  handleWABAEvent(@Body() eventBody: any): string {
+    console.log('Received WABA event:', eventBody);
+    return 'WABA event received';
+  }
+  @Post('waba')
+  handlePostWABAEvent(@Body() eventBody: any): string {
+    console.log('Received WABA event:', eventBody);
+    return 'WABA event received';
+  }
 }
