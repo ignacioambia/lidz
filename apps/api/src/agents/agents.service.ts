@@ -5,7 +5,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Agent, AgentDocument } from '../schemas/agent.schema';
 import { Model, Types } from 'mongoose';
 import { FunctionTool, run, tool } from '@openai/agents';
-import { AgentAction, AgentActionStatus, AgentsAPI } from '@lidz/shared';
+import {
+  AgentAction,
+  AgentActionTemplateStatus,
+  AgentActionTemplate,
+  AgentsAPI,
+} from '@lidz/shared';
 import { agentManager } from './agent-manager.agent';
 import { ActionsService } from 'src/actions/actions.service';
 
@@ -51,7 +56,7 @@ export class AgentsService {
     );
   }
 
-  getAgentFunctionTools(actions: AgentAction[]): FunctionTool[] {
+  getAgentFunctionTools(actions: AgentActionTemplate[]): FunctionTool[] {
     return actions.map(({ tool: storedTool, type }) =>
       tool({
         name: storedTool.name,
@@ -111,7 +116,7 @@ export class AgentsService {
   }
 
   async updateActionStatus(
-    status: AgentActionStatus,
+    status: AgentActionTemplateStatus,
     actionId: Types.ObjectId,
     agentId: string,
   ): Promise<AgentsAPI.PatchActionStatus.Response> {
