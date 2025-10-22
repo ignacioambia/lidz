@@ -7,7 +7,7 @@
     "assets": [
       {
         "include": "**/*.md",
-        "outDir": "dist/src"
+        "outDir": "dist"
       }
     ]
   }
