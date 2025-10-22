@@ -1,6 +1,7 @@
+export type AgentActionType = 'notification';
 export interface AgentAction {
   id: string;
-  type: "notification";
+  type: AgentActionType;
   name: string;
   description: string;
   status: string;

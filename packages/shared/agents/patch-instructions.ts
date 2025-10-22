@@ -1,4 +1,4 @@
-import { AgentAction } from "../agent-action-template";
+import { AgentActionTemplate } from "../agent-action-template";
 
 export namespace PatchInstructionsNamespace {
     export type Request = {
@@ -8,6 +8,6 @@ export namespace PatchInstructionsNamespace {
     export type Response = {
         agentId: string;
         instructions: string;
-        actions: AgentAction[];
+        actions: AgentActionTemplate[];
     };
 }
