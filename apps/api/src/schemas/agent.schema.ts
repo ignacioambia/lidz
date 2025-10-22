@@ -1,4 +1,4 @@
-import { AgentAction, AgentActionStatus } from '@lidz/shared';
+import { AgentActionTemplate, AgentActionTemplateStatus } from '@lidz/shared';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 import { nanoid } from 'nanoid';
@@ -11,7 +11,7 @@ export class AgentActionModel {
   type: string;
 
   @Prop({ required: true, enum: ['pending', 'confirmed', 'rejected'] })
-  status: AgentActionStatus;
+  status: AgentActionTemplateStatus;
 
   @Prop({ type: Object, required: true })
   tool: Record<string, any>;
@@ -42,7 +42,7 @@ export class Agent {
   isActive: boolean;
 
   @Prop({ type: [AgentActionSchema], default: [] })
-  actions: AgentAction[];
+  actions: AgentActionTemplate[];
 
   createdAt: Date;
 

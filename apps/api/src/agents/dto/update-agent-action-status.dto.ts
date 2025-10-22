@@ -1,4 +1,4 @@
-import { AgentActionStatus, AgentsAPI, Exact } from '@lidz/shared';
+import { AgentActionTemplateStatus, AgentsAPI, Exact } from '@lidz/shared';
 import { IsEnum } from 'class-validator';
 
 export class UpdateAgentActionStatusDto
@@ -6,5 +6,5 @@ export class UpdateAgentActionStatusDto
     Exact<AgentsAPI.PatchActionStatus.Request, UpdateAgentActionStatusDto>
 {
   @IsEnum(['pending', 'confirmed', 'rejected'])
-  status: AgentActionStatus;
+  status: AgentActionTemplateStatus;
 }
