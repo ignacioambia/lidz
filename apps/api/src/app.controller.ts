@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ChatsService } from './chats/chats.service';
 
+//TODO: As we are moving to using the whatsapp api directly, this things might change and might not be required anymore
 export interface TwilioWebhookBody {
   MessageSid: string;
   AccountSid: string;

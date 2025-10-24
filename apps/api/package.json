@@ -17,7 +17,10 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "docker:build": "cd ../.. && docker build --platform linux/amd64 -f apps/api/Dockerfile -t api .",
+    "docker:run": "docker run -p 3000:3000 api",
+    "deploy": "fly deploy ../../ --config=apps/api/fly.toml"
   },
   "dependencies": {
     "@lidz/shared": "workspace:*",

@@ -9,6 +9,7 @@ import {
   ConversationSchema,
 } from './schemas/conversation.schema';
 import { AgentsModule } from './agents/agents.module';
+import { WebhooksModule } from './webhooks/webhooks.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AgentsModule } from './agents/agents.module';
       { name: Conversation.name, schema: ConversationSchema },
     ]),
     AgentsModule,
+    WebhooksModule,
   ],
   controllers: [AppController],
   providers: [AppService, ChatsService],
