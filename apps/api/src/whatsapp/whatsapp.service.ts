@@ -13,6 +13,12 @@ interface SendWhatsappMessage {
   fromPhoneNumberId: string;
 }
 
+interface SendWhatsappTemplate {
+  phoneNumberId: string;
+  to: string;
+  templateName: string;
+}
+
 @Injectable()
 export class WhatsappService {
   constructor(private configService: ConfigService) {}
@@ -23,6 +29,53 @@ export class WhatsappService {
       body: `Mensaje recibido: *${receivedMessage.body}*`,
       fromPhoneNumberId: receivedMessage.phoneNumberId,
     });
+  }
+
+  async sendTemplate(template: SendWhatsappTemplate) {
+    await fetch(
+      `https://graph.facebook.com/v22.0/${template.phoneNumberId}/messages`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${this.configService.get('WHATSAPP_ACCESS_TOKEN')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messaging_product: 'whatsapp',
+          to: template.to,
+          type: 'template',
+          template: {
+            name: template.templateName,
+            language: {
+              code: 'es',
+            },
+            //TODO: The parameters should be dynamic based on the template requirements
+            components: [
+              {
+                type: 'body',
+                parameters: [
+                  {
+                    type: 'text',
+                    text: '678920',
+                  },
+                ],
+              },
+              {
+                type: 'button',
+                sub_type: 'url',
+                index: '0',
+                parameters: [
+                  {
+                    type: 'text',
+                    text: '678920',
+                  },
+                ],
+              },
+            ],
+          },
+        }),
+      },
+    );
   }
 
   async sendMessage(message: SendWhatsappMessage) {

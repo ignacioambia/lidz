@@ -10,6 +10,7 @@ import {
 } from './schemas/conversation.schema';
 import { AgentsModule } from './agents/agents.module';
 import { WebhooksModule } from './webhooks/webhooks.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { WebhooksModule } from './webhooks/webhooks.module';
     ]),
     AgentsModule,
     WebhooksModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, ChatsService],
