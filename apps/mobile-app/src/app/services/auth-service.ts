@@ -1,11 +1,20 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  isUserAuthenticated(): boolean {
+
+  private http = inject(HttpClient);
+  isUserAuthenticated() {
+    return true;
+    // return this.http.post('/auth/send-wa-code', );
     // Implement your authentication logic here
-    return true; // Placeholder implementation
+  }
+
+  sendWaCode(phoneNumber: string): Observable<any> {
+    return this.http.post('/auth/send-wa-code', { phoneNumber });
   }
 }

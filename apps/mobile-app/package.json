@@ -26,6 +26,7 @@
     "@angular/platform-browser": "^20.0.0",
     "@angular/router": "^20.0.0",
     "@capacitor/cli": "^7.4.3",
+    "@capacitor/clipboard": "^7.0.2",
     "@capacitor/core": "^7.4.3",
     "@capacitor/ios": "^7.4.3",
     "@capacitor/preferences": "^7.0.2",

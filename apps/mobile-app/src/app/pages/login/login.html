@@ -8,7 +8,7 @@
                     experiencia
                     segura y personalizada.
                 </div>
-                <lidz-input [formControl]="phoneNumberControl" placeholder="Ej. +52 55 43 77 11 48"
+                <lidz-input errorMessage="Número de teléfono inválido" [formControl]="phoneNumberControl" placeholder="Ej. +52 55 43 77 11 48"
                     mask="+00 00 00 00 00 00" label="Número de WhatsApp">
                 </lidz-input>
 
@@ -20,9 +20,17 @@
                     <h3>{{ phoneNumberControl.value }}</h3>
                     <div class="mini-button" (click)="currentStep.set(0)">Cambiar número</div>
                 </div>
-                <lidz-input [formControl]="phoneNumberControl" placeholder="Ej. +52 55 43 77 11 48"
-                    mask="+00 00 00 00 00 00" label="Código de 6 dígitos">
+                <lidz-input errorMessage="El código debe de tener 6 dígitos alfanuméricos" [formControl]="verificationCode" placeholder="xxx xxx" mask="000 000"
+                    label="Código de 6 dígitos">
                 </lidz-input>
+                <div class="code-actions">
+                    <div class="resend-timer">
+                        <!-- Reenviar código en 00:59 -->
+                    </div>
+                    <button class="another" (click)="pasteFromClipboard()">Pegar código</button>
+
+                </div>
+
 
 
                 <button lidz-button (click)="verifyNumber()">Verificar código y entrar</button>

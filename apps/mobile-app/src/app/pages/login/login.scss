@@ -8,6 +8,7 @@
             transition: transform 0.3s ease-in-out;
             transform: translateX(-100%*1);
         }
+
         overflow: hidden;
 
         .step {
@@ -26,13 +27,13 @@
 
 
 
-    button {
-        width: 100%;
-    }
+    // button[lidz-button] {
+    //     // width: 100%;
+    // }
 
     .verify-number {
         lidz-input {
-           margin-top: 1.5rem;
+            margin-top: 1.5rem;
         }
     }
 
@@ -43,4 +44,21 @@
     text-decoration: underline;
     cursor: pointer;
     text-align: end;
+}
+
+.code-actions {
+    display: flex;
+    justify-content: space-between;
+    button {
+        padding: 0.45rem 0.8rem;
+        display: inline;
+        background: white;
+        border-radius: 0.5rem;
+        border: 1px solid var(--primary-color);
+        background: white;
+        align-self: flex-end;
+        justify-self: flex-end;
+        color: var(--primary-color);
+        font-weight: 500;
+    }
 }
