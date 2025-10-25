@@ -27,6 +27,7 @@
     "@angular/platform-browser": "^20.0.0",
     "@angular/router": "^20.0.0",
     "@lidz/shared": "workspace:*",
+    "ngx-mask": "^20.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
