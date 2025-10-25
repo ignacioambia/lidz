@@ -1,0 +1,46 @@
+.login-wrapper {
+    padding: 1rem;
+
+    .stepper {
+
+        .stepper-viewport {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(-100%*1);
+        }
+        overflow: hidden;
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            flex: 0 0 100%;
+
+            h3 {
+                text-align: center;
+            }
+
+
+        }
+    }
+
+
+
+    button {
+        width: 100%;
+    }
+
+    .verify-number {
+        lidz-input {
+           margin-top: 1.5rem;
+        }
+    }
+
+}
+
+.mini-button {
+    color: var(--primary-color);
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: end;
+}

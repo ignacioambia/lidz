@@ -1,0 +1,36 @@
+<div class="login-wrapper">
+
+    <div class="stepper">
+        <div class="stepper-viewport" [style.transform]="`translateX(-${100 * currentStep()}%)`">
+            <div class="step">
+                <div>
+                    ¡Bienvenido! <br /> Ingresa tu número de WhatsApp para acceder o registrarte y disfruta de una
+                    experiencia
+                    segura y personalizada.
+                </div>
+                <lidz-input [formControl]="phoneNumberControl" placeholder="Ej. +52 55 43 77 11 48"
+                    mask="+00 00 00 00 00 00" label="Número de WhatsApp">
+                </lidz-input>
+
+                <button lidz-button (click)="verifyNumber()">Enviar código</button>
+            </div>
+
+            <div class="step verify-number">
+                <div>Ingresa el código de 6 dígitos que te enviamos por WhatsApp a el número de teléfono:
+                    <h3>{{ phoneNumberControl.value }}</h3>
+                    <div class="mini-button" (click)="currentStep.set(0)">Cambiar número</div>
+                </div>
+                <lidz-input [formControl]="phoneNumberControl" placeholder="Ej. +52 55 43 77 11 48"
+                    mask="+00 00 00 00 00 00" label="Código de 6 dígitos">
+                </lidz-input>
+
+
+                <button lidz-button (click)="verifyNumber()">Verificar código y entrar</button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
