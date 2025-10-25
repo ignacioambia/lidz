@@ -3,7 +3,6 @@
     "baseUrl": ".",
     "paths": {
       "@lidz/ui": ["packages/ui-workspace/projects/ui/src/public-api.ts"],
-      "@lidz/shared": ["packages/shared/index.ts"],
       "@lidz/shared-styles": ["packages/ui-workspace/shared-styles/default.scss"]
     }
   }
