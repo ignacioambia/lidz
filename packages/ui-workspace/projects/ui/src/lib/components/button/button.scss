@@ -6,6 +6,46 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: 500;
+    position: relative;
+
+    ld-loader-dots {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &.loading {
+        .content {
+            visibility: hidden;
+
+        }
+
+    }
+
+    &:not(.loading) {
+        ld-loader-dots {
+            display: none;
+        }
+    }
+
+    // min-height: 2rem;
+
+    ng-content {
+        border: 1px solid red !important;
+    }
+
+    &.disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    &.loading {
+        opacity: 0.35;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
 
     // Default (confirm) styles
     // background-color: linear-gradient(to right, #06b6d4, #3b82f6); // teal to blue
@@ -41,7 +81,7 @@
 
         &[data-variant='solid'] {
 
-            &:hover { 
+            &:hover {
                 opacity: 0.9;
             }
         }
