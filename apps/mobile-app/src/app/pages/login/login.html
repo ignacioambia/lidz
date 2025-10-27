@@ -1,15 +1,15 @@
-<div class="login-wrapper">
+<div class="login-wrapper safe-area">
 
     <div class="stepper">
         <div class="stepper-viewport" [style.transform]="`translateX(-${100 * currentStep()}%)`">
             <div class="step">
                 <div>
-                    ¡Bienvenido! <br /> Ingresa tu número de WhatsApp para acceder o registrarte y disfruta de una
+                    <h3>¡Bienvenido!</h3> Ingresa tu número de WhatsApp para acceder o registrarte y disfruta de una
                     experiencia
                     segura y personalizada.
                 </div>
                 <lidz-input errorMessage="Número de teléfono inválido" [formControl]="phoneNumberControl"
-                    placeholder="Ej. +52 55 43 77 11 48" mask="+00 00 00 00 00 00" label="Número de WhatsApp">
+                    placeholder="Ej. +52 61 11 56 78" mask="+00 00 00 00 00 00" label="Número de WhatsApp">
                 </lidz-input>
 
                 <button lidz-button [disabled]="phoneNumberControl.invalid" [loading]="sendingCode"

@@ -1,5 +1,6 @@
 .login-wrapper {
     padding: 1rem;
+    padding-top: 10vh;
 
     .stepper {
 
@@ -20,11 +21,6 @@
             button[lidz-button] {
                 margin-top: 3rem;
             }
-
-            h3 {
-                text-align: center;
-            }
-
 
         }
     }
@@ -53,6 +49,7 @@
 .code-actions {
     display: flex;
     justify-content: space-between;
+
     button {
         padding: 0.45rem 0.8rem;
         display: inline;
