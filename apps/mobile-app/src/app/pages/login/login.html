@@ -13,7 +13,7 @@
                 </lidz-input>
 
                 <button lidz-button [disabled]="phoneNumberControl.invalid" [loading]="sendingCode"
-                    (click)="verifyNumber()">Enviar código</button>
+                    (click)="sendWACode()">Enviar código</button>
             </div>
 
             <div class="step verify-number">
@@ -33,15 +33,11 @@
 
                 </div>
 
-
-
-                <button [disabled]="verificationCode.invalid" lidz-button (click)="verifyNumber()">Verificar código y
+                <button lidz-button [disabled]="verificationCode.invalid" [loading]="verifyingCode"
+                    (click)="verifyWACode()">Verificar código y
                     entrar</button>
             </div>
         </div>
 
     </div>
-
-
-
 </div>

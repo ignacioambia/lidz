@@ -9,11 +9,10 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../services/auth-service';
 import { Clipboard } from '@capacitor/clipboard';
-import { finalize } from 'rxjs';
-
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login',
-  imports: [Button, LidzInput, FormsModule, ReactiveFormsModule],
+  imports: [Button, LidzInput, FormsModule, ReactiveFormsModule, MatSnackBarModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -30,8 +29,11 @@ export class Login {
   private authService = inject(AuthService);
 
   public sendingCode = false;
+  public verifyingCode = false;
 
-  verifyNumber() {
+  private snackBar = inject(MatSnackBar);
+
+  sendWACode() {
     const phoneNumber = this.phoneNumberControl.value;
 
     if (!phoneNumber) {
@@ -48,6 +50,29 @@ export class Login {
       error: (error) => {
         console.error('Error sending WA code', error);
         this.sendingCode = false;
+      },
+    });
+  }
+
+  verifyWACode() {
+    const phoneNumber = this.phoneNumberControl.value;
+    const code = this.verificationCode.value;
+
+    if (!phoneNumber || !code) {
+      console.error('Phone number and verification code are required');
+      return;
+    }
+
+    this.verifyingCode = true;
+    this.authService.verifyWACode(phoneNumber, code).subscribe({
+      next: (response) => {
+        // Proceed to the next step after successful verification
+        this.verifyingCode = false;
+      },
+      error: (error) => {
+        this.snackBar.open('Código incorrecto. Intenta de nuevo.', 'Cerrar', { duration: 3000 });
+        console.error('Error verifying WA code', error);
+        this.verifyingCode = false;
       },
     });
   }

@@ -17,4 +17,8 @@ export class AuthService {
   sendWaCode(phoneNumber: string): Observable<any> {
     return this.http.post('/auth/send-wa-code', { phoneNumber });
   }
+
+  verifyWACode(phoneNumber: string, code: string): Observable<any> {
+    return this.http.post('/auth/verify-wa-code', { phoneNumber, code });
+  }
 }
