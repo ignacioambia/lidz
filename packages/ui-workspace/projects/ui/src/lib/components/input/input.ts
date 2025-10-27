@@ -72,6 +72,7 @@ export class LidzInput implements ControlValueAccessor, OnInit {
   public placeholder = input<string>('');
   public mask = input<string>('');
   public errorMessage = input<string>('');
+  public type = input<string>('text');
 
   private onChange: (value: string) => void = () => {
     console.warn('missing onchange function');
