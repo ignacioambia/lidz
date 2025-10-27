@@ -56,7 +56,7 @@ export class Login {
     try {
       const { value } = await Clipboard.read();
       if (value) {
-        console.log(value);
+        this.verificationCode.setValue(value);
       }
     } catch (error) {
       console.error('Error reading from clipboard', error);
