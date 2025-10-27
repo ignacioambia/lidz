@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { customAlphabet } from 'nanoid';
 import { WhatsappService } from 'src/whatsapp/whatsapp.service';
@@ -16,6 +16,25 @@ export class AuthService {
     @InjectModel(VerificationCode.name)
     private readonly verificationCodeModel: Model<VerificationCodeDocument>,
   ) {}
+
+  async verifyWhatsappCode(phoneNumber: string, code: string) {
+    const record = await this.verificationCodeModel
+      .findOne({ phoneNumber, code })
+      .sort({ createdAt: -1 });
+
+    if (!record) {
+      throw new BadRequestException('Invalid verification code.');
+    }
+
+    if (record.expiresAt < new Date()) {
+      throw new BadRequestException('Verification code has expired.');
+    }
+
+    await this.verificationCodeModel.deleteMany({ phoneNumber });
+
+    return { message: 'Phone number verified successfully' };
+  }
+
   async sendWhatsappVerificationCode(phoneNumber: string) {
     const code = nanoid();
     await this.verificationCodeModel.create({
