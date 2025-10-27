@@ -17,6 +17,7 @@ interface SendWhatsappTemplate {
   phoneNumberId: string;
   to: string;
   templateName: string;
+  components: unknown[];
 }
 
 @Injectable()
@@ -50,28 +51,7 @@ export class WhatsappService {
               code: 'es',
             },
             //TODO: The parameters should be dynamic based on the template requirements
-            components: [
-              {
-                type: 'body',
-                parameters: [
-                  {
-                    type: 'text',
-                    text: '678920',
-                  },
-                ],
-              },
-              {
-                type: 'button',
-                sub_type: 'url',
-                index: '0',
-                parameters: [
-                  {
-                    type: 'text',
-                    text: '678920',
-                  },
-                ],
-              },
-            ],
+            components: template.components || [],
           },
         }),
       },
