@@ -17,6 +17,10 @@
             gap: 1.2rem;
             flex: 0 0 100%;
 
+            button[lidz-button] {
+                margin-top: 3rem;
+            }
+
             h3 {
                 text-align: center;
             }
