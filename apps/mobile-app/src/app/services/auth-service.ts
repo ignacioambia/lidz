@@ -9,7 +9,7 @@ export class AuthService {
 
   private http = inject(HttpClient);
   isUserAuthenticated() {
-    return true;
+    return false;
     // return this.http.post('/auth/send-wa-code', );
     // Implement your authentication logic here
   }
