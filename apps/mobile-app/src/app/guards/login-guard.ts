@@ -4,8 +4,8 @@ import { Preferences } from '@capacitor/preferences';
 
 export const loginGuard: CanActivateFn = async (route, state) => {
   const router = inject(Router);
-  const token = await Preferences.get({ key: 'auth_token' });
-  if (token.value) {
+  const token = await localStorage.getItem('auth_token');
+  if (token) {
     router.navigate(['/']);
     return false;
   }

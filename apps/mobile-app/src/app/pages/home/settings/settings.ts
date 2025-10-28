@@ -26,9 +26,9 @@ export class Settings {
     this.dialog.open({
       title: 'Cerrar sesión',
       content: '¿Estás seguro de que deseas cerrar sesión?',
-      handleAction: async (action) => {
+      handleAction: (action) => {
         if (action === 'confirm') {
-          await Preferences.remove({ key: 'auth_token' });
+          localStorage.removeItem('auth_token');
           this.router.navigate(['/login']);
         }
       }
