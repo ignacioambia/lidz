@@ -4,6 +4,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { Button, DialogService } from '@lidz/ui';
 import { Preferences } from '@capacitor/preferences';
 import { Router } from '@angular/router';
+import { CustomerService } from '../../../services/customer';
 
 @Component({
   selector: 'app-settings',
@@ -13,13 +14,20 @@ import { Router } from '@angular/router';
   styleUrl: './settings.scss'
 })
 export class Settings {
-  phoneNumber: string;
+  phoneNumber = '-';
   private dialog = inject(DialogService);
   private router = inject(Router);
+  private customerService = inject(CustomerService);  
 
   constructor() {
-    // Aquí deberías obtener el número de teléfono del usuario autenticado
-    this.phoneNumber = '+1234567890'; // Ejemplo estático
+    this.customerService.getProfile().subscribe({
+      next: (profile) => {
+        this.phoneNumber = profile.phoneNumber;
+      },
+      error: (err) => {
+        console.error('Error fetching profile:', err);
+      }
+    });
   }
 
   logout() {
