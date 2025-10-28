@@ -12,6 +12,8 @@ import { AgentsModule } from './agents/agents.module';
 import { WebhooksModule } from './webhooks/webhooks.module';
 import { AuthModule } from './auth/auth.module';
 import { CustomersModule } from './customers/customers.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/guards/auth/auth.guard';
 
 @Module({
   imports: [
@@ -34,7 +36,14 @@ import { CustomersModule } from './customers/customers.module';
     CustomersModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ChatsService],
+  providers: [
+    AppService,
+    ChatsService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
   exports: [ChatsService],
 })
 export class AppModule {}
