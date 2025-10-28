@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { API_CONFIG, baseUrlInterceptor } from '@lidz/ui'
+import { API_CONFIG, authTokenInterceptor, baseUrlInterceptor,  } from '@lidz/ui'
 import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
@@ -13,6 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([baseUrlInterceptor]))
+    provideHttpClient(withInterceptors([baseUrlInterceptor, authTokenInterceptor])),
   ]
 };
