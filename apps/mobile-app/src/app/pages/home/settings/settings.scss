@@ -1,0 +1,22 @@
+.card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--muted-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    ng-icon {
+        opacity: 0.7;
+    }
+
+    h3 {
+        margin: 0;
+    }
+}
+
+.logout-button {
+    margin-top: 4rem;
+    width: 100%;
+}
