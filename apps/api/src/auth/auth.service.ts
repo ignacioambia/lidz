@@ -7,6 +7,8 @@ import {
   VerificationCodeDocument,
 } from './schemas/verification-code.schema';
 import { Model } from 'mongoose';
+import { Customer } from 'src/customers/schemas/customer.schema';
+import { JwtService } from '@nestjs/jwt';
 
 const nanoid = customAlphabet('0123456789', 6);
 @Injectable()
@@ -15,6 +17,9 @@ export class AuthService {
     private readonly whatsappService: WhatsappService,
     @InjectModel(VerificationCode.name)
     private readonly verificationCodeModel: Model<VerificationCodeDocument>,
+    @InjectModel(Customer.name)
+    private readonly customerModel: Model<Customer>,
+    private jwtService: JwtService,
   ) {}
 
   async verifyWhatsappCode(phoneNumber: string, code: string) {
@@ -32,7 +37,17 @@ export class AuthService {
 
     await this.verificationCodeModel.deleteMany({ phoneNumber });
 
-    return { message: 'Phone number verified successfully' };
+    let user = await this.customerModel.findOne({ phoneNumber });
+    if (!user) {
+      user = await this.customerModel.create({ phoneNumber });
+    }
+
+    const token = this.jwtService.sign({
+      sub: user._id,
+      phoneNumber: user.phoneNumber,
+    });
+
+    return { token };
   }
 
   async sendWhatsappVerificationCode(phoneNumber: string) {
