@@ -10,6 +10,8 @@ import {
 import { AuthService } from '../../services/auth-service';
 import { Clipboard } from '@capacitor/clipboard';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { Preferences } from '@capacitor/preferences';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [Button, LidzInput, FormsModule, ReactiveFormsModule, MatSnackBarModule],
@@ -32,6 +34,7 @@ export class Login {
   public verifyingCode = false;
 
   private snackBar = inject(MatSnackBar);
+  private router = inject(Router);
 
   sendWACode() {
     const phoneNumber = this.phoneNumberControl.value;
@@ -66,8 +69,10 @@ export class Login {
     this.verifyingCode = true;
     this.authService.verifyWACode(phoneNumber, code).subscribe({
       next: (response) => {
-        // Proceed to the next step after successful verification
+        Preferences.set({ key: 'auth_token', value: response.token });
+        this.router.navigate(['/']);
         this.verifyingCode = false;
+        // Proceed to the next step after successful verification
       },
       error: (error) => {
         this.snackBar.open('Código incorrecto. Intenta de nuevo.', 'Cerrar', { duration: 3000 });

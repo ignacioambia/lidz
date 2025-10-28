@@ -8,11 +8,6 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   private http = inject(HttpClient);
-  isUserAuthenticated() {
-    return false;
-    // return this.http.post('/auth/send-wa-code', );
-    // Implement your authentication logic here
-  }
 
   sendWaCode(phoneNumber: string): Observable<any> {
     return this.http.post('/auth/send-wa-code', { phoneNumber });
