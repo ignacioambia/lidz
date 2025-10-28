@@ -1,0 +1,15 @@
+<div class="overlay">
+    <div class="dialog" [ngClass]="{'with-icon': dialogParams.icon}">
+        @if (dialogParams.icon) {
+        <div class="icon-wrapper">
+            <ng-container *ngComponentOutlet="dialogParams.icon"></ng-container>
+        </div>
+        }
+        <h2>{{ dialogParams.title }}</h2>
+        <p>{{ dialogParams.content }}</p>
+        <div class="buttons-section">
+            <button variant="outline" lidz-button (click)="closeDialog('cancel')">Cancelar</button>
+            <button lidz-button (click)="closeDialog('confirm')">Confirmar</button>
+        </div>
+    </div>
+</div>
