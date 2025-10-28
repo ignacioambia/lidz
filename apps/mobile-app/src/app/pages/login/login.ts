@@ -69,7 +69,7 @@ export class Login {
     this.verifyingCode = true;
     this.authService.verifyWACode(phoneNumber, code).subscribe({
       next: (response) => {
-        Preferences.set({ key: 'auth_token', value: response.token });
+        localStorage.setItem('auth_token', response.token);
         this.router.navigate(['/']);
         this.verifyingCode = false;
         // Proceed to the next step after successful verification
